@@ -116,8 +116,6 @@ GLAD_SRC	= $(INCDIR)/glad/glad.c
 
 
 #Main Rules
-.PHONY: all debug release run
-
 all: debug
 
 run: all
@@ -126,8 +124,6 @@ run: all
 
 
 # Release Targets
-.PHONY: debug release build
-
 debug: CXXFLAGS += -DDEBUG -g -ggdb
 #~ debug: CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
 #~ debug: LFLAGS += -fsanitize=address -fno-omit-frame-pointer
@@ -144,8 +140,6 @@ build: $(TARGETPATH) resources shaders
 
 
 # Housekeeping Rules
-.PHONY: clean clean-glad distclean
-
 clean:
 	-rm -rf $(OBJDIR) $(BIN)
 
@@ -155,8 +149,6 @@ distclean: unsetup
 
 
 # Resource Rules
-.PHONY: shaders resources dynamic
-
 shaders: dir-setup
 	@cp -r $(SHADIR)/* $(SHABIN)
 
@@ -166,8 +158,6 @@ resources: dir-setup
 
 
 # Setup and Dependencies
-.PHONY: setup unsetup dir-setup deps-setup lib-setup glad-setup
-
 setup: deps-setup glad-setup
 
 unsetup: clean clean-glad
@@ -193,13 +183,22 @@ $(SHABIN):
 
 $(RECBIN):
 	@mkdir -p $(RECBIN)
+	@touch $(RECBIN)/meow.txt
 
 
 deps-setup:
 	@$(MK_DEPS) $(DEPSPATH)
 
-glad-setup:
+glad-setup: libs-setup
 	@$(MK_GLAD) $(PIP2) $(PYTHON2) $(GLAD_SRC) $(INCDIR) $(GL_MAJOR) $(GL_MINOR) $(GL_GEN) $(GL_EXT)
+
+
+
+# Library Setup
+libs-setup: libs-setup
+	@mkdir -p $(LIBDIR)
+	@mkdir -p $(INCDIR)
+	@mkdir -p $(DYNDIR)
 	
 
 
