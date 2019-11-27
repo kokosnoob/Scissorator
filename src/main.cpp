@@ -10,14 +10,17 @@ namespace {
 	chrono::high_resolution_clock::time_point endFrameTime = startTime;
 }
 
-namespace time {
+namespace Time {
+	float dTime;
+	chrono::high_resolution_clock::time_point endFrameTime; 
+	
+	
 	void markFrame() {
-		lastFrameTime = chrono::duration_cast<chrono::microseconds>(chrono::high_resolution_clock::now() -
+		 dTime = chrono::duration_cast<chrono::microseconds>(chrono::high_resolution_clock::now() -
 		 endFrameTime).count() / 1e6f;
-		endFrameTime = chrono::high_resolution_clock::now();
+		 endFrameTime = chrono::high_resolution_clock::now();
 	}
 
-	float dTime() { return lastFrameTime; }
 	float accumTime() { 
 		return 	chrono::duration_cast<chrono::microseconds>(chrono::high_resolution_clock::now() -
 		 startTime).count() / 1e6f; 
@@ -47,7 +50,7 @@ int main(){
   
   while(!glfwWindowShouldClose(window)){
   	//mark the frame
-  	time::markFrame(); 
+  	Time::markFrame(); 
   	
   	//input processing
   	
