@@ -24,14 +24,14 @@ Camera::Camera() :
 
 { }
 
-Camera::Camera(vec3 par_pos): Camera() {
+Camera::Camera(vec3 p_pos): Camera() {
 	fov = 80.0f;
 	clipNear = 0.1f;
 	clipFar = 100.0f;
 	
 	moveSpeed = 1.0f;
 	
-	pos = par_pos;
+	pos = p_pos;
 	front = vec3(0.0f, 0.0f, -1.0f);
 }
 

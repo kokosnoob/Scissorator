@@ -1,7 +1,7 @@
 #ifndef _H_CAMERA
 #define _H_CAMERA
 
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 #include <iostream>
 #include <vector>
 
@@ -35,6 +35,6 @@ class Camera{
 			vec3 right; // Local +x axis of camera
 			vec3 up; // Local +y axis of camera
 			vec3 front; // Local +z axis of camera (note this is backwards in right-handed coordinate system).
-}
+};
 
 #endif

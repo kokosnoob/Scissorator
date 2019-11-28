@@ -160,7 +160,7 @@ resources: dir-setup
 # Setup and Dependencies
 setup: deps-setup glad-setup
 
-unsetup: clean clean-glad
+unsetup: clean
 	-rm -rf $(OBJDIR) $(BIN) $(DYNDIR) $(INCDIR)
 	@if $(PYTHON2) -c "import glad" &> /dev/null; then yes y | $(PIP2) uninstall glad --quiet; echo "y"; fi
 
@@ -195,7 +195,7 @@ glad-setup: libs-setup
 
 
 # Library Setup
-libs-setup: libs-setup
+libs-setup:
 	@mkdir -p $(LIBDIR)
 	@mkdir -p $(INCDIR)
 	@mkdir -p $(DYNDIR)
